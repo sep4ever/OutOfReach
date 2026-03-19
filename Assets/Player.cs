@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 
@@ -19,10 +20,14 @@ public class Player : MonoBehaviour
 
     [SerializeField] Transform cameraTransform;
 
+    [Header("Sound")]
+    [SerializeField] AudioSource footstepAudioSource;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();
+        footstepAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -50,6 +55,8 @@ public class Player : MonoBehaviour
     {
         playerInput = Vector3.zero;
         playerInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+
+        footstepAudioSource.volume = Mathf.Lerp(footstepAudioSource.volume, playerInput.normalized.magnitude, 5 * Time.deltaTime);
 
         Vector3 camForward = cameraTransform.forward;
         camForward.y = 0f;
