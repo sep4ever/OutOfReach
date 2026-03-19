@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     public float pitch = 0.0f;
 
     [SerializeField] Transform cameraTransform;
-
+    public bool mouseLock = true;
     [Header("Sound")]
     [SerializeField] AudioSource footstepAudioSource;
 
@@ -43,17 +43,23 @@ public class Player : MonoBehaviour
 
     void RotateCamera()
     {
-        yaw += speedH * Input.GetAxis("Mouse X");
-        pitch -= speedV * Input.GetAxis("Mouse Y");
+        if (mouseLock)
+        {
+            yaw += speedH * Input.GetAxis("Mouse X");
+            pitch -= speedV * Input.GetAxis("Mouse Y");
 
-        pitch = Mathf.Clamp(pitch, -90f, 90f);
+            pitch = Mathf.Clamp(pitch, -90f, 90f);
 
-        cameraTransform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
+            cameraTransform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
+        }
+        if (Input.GetKeyDown(KeyCode.Escape)) mouseLock = !mouseLock;
+
+        Cursor.lockState = mouseLock ? CursorLockMode.Locked : CursorLockMode.None;
     }
 
     void Move()
     {
-        playerInput = Vector3.zero;
+        //playerInput = Vector3.zero;
         playerInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
         footstepAudioSource.volume = Mathf.Lerp(footstepAudioSource.volume, playerInput.normalized.magnitude, 5 * Time.deltaTime);
