@@ -2,46 +2,60 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using TMPro;
-using System;
-using Unity.VisualScripting;
 
 public class DialogueBox : MonoBehaviour
 {
-    [SerializeField] List<string> dialogueLines;
+    [SerializeField] public List<string> dialogueLines = new List<string>();
     [SerializeField] TMP_Text text;
     [SerializeField] float typingSpeed = 0.05f;
 
     public int iterator = 0;
     public bool finished = false;
 
-    void Start()
-    {
-        Type();
-    }
+    [SerializeField] bool firstStart = false;
 
     void Update()
     {
-        finished = dialogueLines[iterator].Length == text.maxVisibleCharacters;
-        if (!finished || Input.GetKey(KeyCode.Z)) Type();
-        if (iterator < dialogueLines.Count - 1 && Input.GetKeyDown(KeyCode.E) && finished) iterator++;
+        if (dialogueLines == null || iterator >= dialogueLines.Count)
+            return;
+
+        if (firstStart)
+        {
+            firstStart = false;
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (!finished)
+            {
+                text.maxVisibleCharacters = dialogueLines[iterator].Length;
+                return;
+            }
+            if (iterator < dialogueLines.Count - 1)
+            {
+                iterator++;
+                Type();
+            }
+        }
     }
 
     Coroutine typingCoroutine;
-    void Type()
+    public void Type()
     {
-        if (typingCoroutine == null)
+        if (typingCoroutine != null)
         {
-            Clear();
-            typingCoroutine = StartCoroutine("TypingCoroutine");
+            StopCoroutine(typingCoroutine);
         }
-        else if (Input.GetKeyDown(KeyCode.E) && !finished) text.maxVisibleCharacters = dialogueLines[iterator].Length;
+
+        Clear();
+        typingCoroutine = StartCoroutine(TypingCoroutine());
     }
 
     IEnumerator TypingCoroutine()
     {
-        //text.maxVisibleCharacters = 0;
-        //text.text = dialogueLines[iterator];
-        while (text.maxVisibleCharacters < dialogueLines[iterator].Length)
+        string currentLine = dialogueLines[iterator];
+        while (text.maxVisibleCharacters < currentLine.Length)
         {
             finished = false;
             text.maxVisibleCharacters++;
@@ -51,10 +65,32 @@ public class DialogueBox : MonoBehaviour
         typingCoroutine = null;
     }
 
-    void Clear()
+    public void Clear()
     {
         text.maxVisibleCharacters = 0;
         text.text = dialogueLines[iterator];
         finished = false;
+    }
+
+    public void ClearAll()
+    {
+        text.maxVisibleCharacters = 0;
+        text.text = "";
+        finished = false;
+        dialogueLines = new List<string>();
+    }
+
+    public void SetMessages(List<string> newMessages)
+    {
+        firstStart = true;
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+        iterator = 0;
+        dialogueLines = newMessages;
+        Clear();
+        Type();
     }
 }

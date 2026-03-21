@@ -1,14 +1,11 @@
-using NUnit.Framework;
 using TMPro;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 
 public class Player : MonoBehaviour
 {
     [Header("Movement.")]
-    Rigidbody playerRB;
+    public bool canMove = true;
+    [SerializeField] Rigidbody playerRB;
     [SerializeField] Vector3 playerInput;
     [SerializeField] float playerSpeed = 10f;
 
@@ -25,13 +22,17 @@ public class Player : MonoBehaviour
     [Header("Sound")]
     [SerializeField] AudioSource footstepAudioSource;
 
+    [Header("QuestSystem")]
+    [SerializeField] QuestHandling questHandler;
+    [SerializeField] public Quest quest;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameManager.Instance.LoadGame();
         playerRB = GetComponent<Rigidbody>();
         footstepAudioSource = GetComponent<AudioSource>();
         layerMask = LayerMask.GetMask("Interactable");
+        if (GameManager.Instance != null) GameManager.Instance.LoadGame();
     }
 
     // Update is called once per frame
@@ -42,24 +43,52 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (canMove) Move();
+        if (!canMove) footstepAudioSource.volume = Mathf.Lerp(footstepAudioSource.volume, 0, 5 * Time.deltaTime);
         Interact();
     }
 
-
-    LayerMask layerMask;
-    [SerializeField] GameObject interactionText;
+    [SerializeField] LayerMask layerMask;
+    [SerializeField] TMP_Text interactionText;
     [SerializeField] float interactionRange;
+    bool interacted = false;
+    public bool interactedWithWindow = false;
     void Interact()
     {
         RaycastHit hit;
-        bool isHit = Physics.Raycast(transform.position, cameraTransform.TransformDirection(Vector3.forward), out hit, interactionRange, layerMask);
-        Debug.DrawRay(transform.position, cameraTransform.TransformDirection(Vector3.forward) * interactionRange, Color.red);
-        if (isHit && Input.GetKeyDown(KeyCode.E))
+
+        bool isHit = Physics.Raycast(
+            transform.position,
+            cameraTransform.forward,
+            out hit,
+            interactionRange,
+            layerMask
+        );
+
+        if (!isHit)
         {
-            Debug.Log("Interact");
+            interactionText.gameObject.SetActive(false);
+            interacted = false;
+            return;
         }
-        interactionText.SetActive(isHit);
+
+        var interactable = hit.transform.GetComponentInParent<Interactable>();
+
+        if (interactable != null)
+        {
+            interactionText.gameObject.SetActive(!interacted);
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                interacted = true;
+                interactable.Interact();
+                interactedWithWindow = hit.transform.name == "Window";
+            }
+        }
+        else
+        {
+            interactionText.gameObject.SetActive(false);
+        }
     }
 
     void RotateCamera()

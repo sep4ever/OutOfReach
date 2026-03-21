@@ -915,7 +915,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1820934132}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.03918291
+  m_Size: 0.03717303
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -990,7 +990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c56c6523f67d09478eade0cf389ae19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuHandler
-  scene: World
+  scene: Cutscene
 --- !u!114 &633294599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2469,110 +2469,110 @@ MonoBehaviour:
 
     (Ba-ba-ba-ba-ba)
 
-    
 
-    We could leave the lights on, sun-tan
-    (bo-bow-bo-bo)
 
-    We could get lunch, aw, man (ba-ba-ba-ba-ba)
+    We could leave the lights on, sun-tan (bo-bow-bo-bo)
 
-    I think
-    that I like you (you do?) Yeah
+    We
+    could get lunch, aw, man (ba-ba-ba-ba-ba)
 
-    But something bugs me ''bout the way you
-    lick your envelopes, so-
+    I think that I like you (you do?)
+    Yeah
 
-    
+    But something bugs me ''bout the way you lick your envelopes, so-
 
-    I''m out on the block again (ba-ba-ba-ba-ba)
 
-    So
-    hopped up that I can''t pretend
 
-    Two time (ba-ba-ba-ba-ba), stay friends
+    I''m
+    out on the block again (ba-ba-ba-ba-ba)
 
-    Problem
-    that you can''t defend (oh)
+    So hopped up that I can''t pretend
 
-    Hands up, feel okay (ba-ba-ba-ba-ba)
+    Two
+    time (ba-ba-ba-ba-ba), stay friends
 
-    Whose
-    heart could I break today?
+    Problem that you can''t defend (oh)
 
-    Two time (ba-ba-ba-ba-ba), stay friends
+    Hands
+    up, feel okay (ba-ba-ba-ba-ba)
 
-    Problem
-    that you can''t defend
+    Whose heart could I break today?
 
-    
+    Two
+    time (ba-ba-ba-ba-ba), stay friends
+
+    Problem that you can''t defend
+
+
 
     (Oh)
 
-    (Why does it ha-happen?)
+    (Why
+    does it ha-happen?)
 
-    
 
-    Slip
-    me in your pocket
+
+    Slip me in your pocket
 
     Chicka-chew the way out
 
-    Oh man, was that your last
-    piece of gum? (Ba-ba-ba-ba-ba)
+    Oh
+    man, was that your last piece of gum? (Ba-ba-ba-ba-ba)
 
-    (Come on) but we both wanted some
+    (Come on) but we
+    both wanted some
 
-    I
-    know, and you can get in the hole too
+    I know, and you can get in the hole too
 
-    Oh yeah, what can you say?
+    Oh yeah, what
+    can you say?
 
-    I
-    never read the package anyway (oh)
+    I never read the package anyway (oh)
 
-    
 
-    I''m out on the block again (ba-ba-ba-ba-ba)
 
-    So
-    hopped up that I can''t pretend (ooh)
+    I''m out on the
+    block again (ba-ba-ba-ba-ba)
+
+    So hopped up that I can''t pretend (ooh)
+
+    Two
+    time (ba-ba-ba-ba-ba), stay friends
+
+    Problem that you can''t defend (oh)
+
+    Hands
+    up, feel okay (ba-ba-ba-ba-ba)
+
+    Whose heart could I break today?
+
+    Two
+    time (ba-ba-ba-ba-ba), stay friends
+
+    Problem that you can''t defend
+
+
+
+    I''m
+    out on the block again (ba-ba-ba-ba-ba)
+
+    So hopped up that I can''t pretend
+    (ooh)
 
     Two time (ba-ba-ba-ba-ba), stay friends
 
-    Problem
-    that you can''t defend (oh)
+    Problem that you can''t
+    defend (oh)
 
     Hands up, feel okay (ba-ba-ba-ba-ba)
 
-    Whose
-    heart could I break today?
+    Whose heart could
+    I break today?
 
     Two time (ba-ba-ba-ba-ba), stay friends
 
-    Problem
-    that you can''t defend
-
-    
-
-    I''m out on the block again (ba-ba-ba-ba-ba)
-
-    So
-    hopped up that I can''t pretend (ooh)
-
-    Two time (ba-ba-ba-ba-ba), stay friends
-
-    Problem
-    that you can''t defend (oh)
-
-    Hands up, feel okay (ba-ba-ba-ba-ba)
-
-    Whose
-    heart could I break today?
-
-    Two time (ba-ba-ba-ba-ba), stay friends
-
-    Problem
-    that you can''t defend
+    Problem that
+    you can''t defend
 
 '
   m_isRightToLeft: 0
