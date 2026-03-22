@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class DialogueBox : MonoBehaviour
 {
@@ -12,10 +13,24 @@ public class DialogueBox : MonoBehaviour
     public int iterator = 0;
     public bool finished = false;
 
+    public bool finishedDialogue = false;
+    public bool isActive = false;
+
     [SerializeField] bool firstStart = false;
+    [SerializeField] GameObject dialogueBoxImage;
+
+    Player player;
+
+    void Start()
+    {
+        player = FindAnyObjectByType<Player>();
+    }
 
     void Update()
     {
+        isActive = text.text != "" && text.maxVisibleCharacters != 0;
+        dialogueBoxImage.SetActive(isActive);
+        finishedDialogue = iterator >= dialogueLines.Count - 1 && finished;
         if (dialogueLines == null || iterator >= dialogueLines.Count)
             return;
 

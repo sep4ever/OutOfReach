@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Movement.")]
-    public bool canMove = true;
+    public bool canMove = false;
     [SerializeField] Rigidbody playerRB;
     [SerializeField] Vector3 playerInput;
     [SerializeField] float playerSpeed = 10f;
@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
     [SerializeField] QuestHandling questHandler;
     [SerializeField] public Quest quest;
 
+    [Header("Starting Dialogue")]
+    [SerializeField] DialogueBox dialogueBox;
+    [SerializeField] bool firstStart = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,15 +38,25 @@ public class Player : MonoBehaviour
         if (GameManager.Instance != null) GameManager.Instance.LoadGame();
     }
 
+    private void Awake()
+    {
+        dialogueBox.SetMessages(new System.Collections.Generic.List<string> { "Снова.", "Снова я проснулся.", "Каждый день я надеюсь, что я не проснусь.", "Хотя... Весь этот кошмар что со мной происходит...", "Моя жизнь кажется просто плохим сном.", "После того как началась война..." });
+    }
+
     // Update is called once per frame
     void Update()
     {
+        /*if (!canMove && firstStart)
+        {
+            canMove = dialogueBox.finishedDialogue;
+            firstStart = false;
+        }*/
         RotateCamera();
     }
 
     private void FixedUpdate()
     {
-        if (canMove) Move();
+        if (canMove && !dialogueBox.isActive) Move();
         if (!canMove) footstepAudioSource.volume = Mathf.Lerp(footstepAudioSource.volume, 0, 5 * Time.deltaTime);
         Interact();
     }
@@ -53,6 +66,9 @@ public class Player : MonoBehaviour
     [SerializeField] float interactionRange;
     bool interacted = false;
     public bool interactedWithWindow = false;
+    public bool interactedWithWorkingStation = false;
+    public bool interactedWithBed = false;
+    public bool interactedWithShotgun = false;
     void Interact()
     {
         RaycastHit hit;
@@ -82,7 +98,9 @@ public class Player : MonoBehaviour
             {
                 interacted = true;
                 interactable.Interact();
-                interactedWithWindow = hit.transform.name == "Window";
+                interactedWithWindow = hit.transform.GetComponent<Window>() != null;
+                interactedWithWorkingStation = hit.transform.GetComponent<WorkingStation>() != null;
+                interactedWithBed = hit.transform.GetComponent<Bed>() != null;
             }
         }
         else

@@ -19,9 +19,9 @@ public class QuestHandling : MonoBehaviour
     //float duration = 1f;
     RectTransform questImage;
     [SerializeField] TMP_Text questTexts;
-    [SerializeField] List<Quest> quests = new List<Quest>(); // Короче, есть лист с квестами, он является константой(просто незаданным, чтоб был в инспекторе). Каждому квесту задаётся условие В РУЧНУЮ. В методе Awake().
+    [SerializeField] public List<Quest> quests = new List<Quest>(); // Короче, есть лист с квестами, он является константой(просто незаданным, чтоб был в инспекторе). Каждому квесту задаётся условие В РУЧНУЮ. В методе Awake().
      
-    [SerializeField] int questId;
+    [SerializeField] public int questId;
     Player player;
     [SerializeField] string markUpParameter;
     private void Awake()
@@ -29,23 +29,31 @@ public class QuestHandling : MonoBehaviour
         questImage = GetComponent<RectTransform>();
         player = FindAnyObjectByType<Player>();
 
-        questId = Random.Range(0, quests.Count);
+        //questId = Random.Range(0, quests.Count);
         player.quest = quests[questId];
 
         quests[0].completionCondition = () => player.interactedWithWindow; //player.interactedWithWindow - костыль, проверяет название объекта. Измени, если будет возможность.
+        quests[1].completionCondition = () => player.interactedWithWorkingStation;
+        quests[2].completionCondition = () => player.interactedWithBed;
+        quests[3].completionCondition = () => player.interactedWithWindow;
+        quests[4].completionCondition = () => player.interactedWithWorkingStation;
+        quests[5].completionCondition = () => player.interactedWithBed;
+        quests[6].completionCondition = () => player.interactedWithWindow;
+        quests[7].completionCondition = () => player.interactedWithWorkingStation;
+        quests[8].completionCondition = () => player.interactedWithShotgun;
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q)) Open();
         if (Input.GetKeyDown(KeyCode.E)) Close();
 
-        if (quests[questId].isCompleted)
+        if (quests[questId].isCompleted && !AllQuestsCompleted())
         {
             do
             {
-                questId = Random.Range(0, quests.Count);
+                questId++;// = Random.Range(0, quests.Count);
             }
-            while (quests[questId].isCompleted && !AllQuestsCompleted());
+            while (quests[questId].isCompleted);
             player.quest = quests[questId];
         }
 

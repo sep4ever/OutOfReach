@@ -10,20 +10,24 @@ public class Bed : Interactable
     AudioSource breathing;
     float duration = 1.5f;
 
+    Player player;
     void Awake()
     {
+        player = FindAnyObjectByType<Player>();
         bedImage.color = new Color(0, 0, 0, 0);
         breathing = GetComponent<AudioSource>();
     }
 
+    Coroutine fadingCoroutine = null;
     public override void Interact()
     {
-        StartCoroutine(FadeToBlack());
+        if (fadingCoroutine == null) fadingCoroutine = StartCoroutine(FadeToBlack());
     }
 
     IEnumerator FadeToBlack()
     {
         float t = 0f;
+        player.canMove = false;
 
         while (t < duration)
         {
@@ -61,5 +65,7 @@ public class Bed : Interactable
             yield return null;
         }
         music.volume = GameManager.Instance.saveData.volume;
+        player.canMove = true;
+        fadingCoroutine = null;
     }
 }
