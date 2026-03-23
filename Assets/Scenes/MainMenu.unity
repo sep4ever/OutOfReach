@@ -913,7 +913,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1820934132}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.040849674
+  m_Size: 0.6944444
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2454,125 +2454,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Hey
-
-    (Give it a little attack-tack)
-
-    (Work!)
-
-    (Woo-hoo-hoo-hoo)
-
-    (Listen,
-    oh)
-
-    (Ba-ba-ba-ba-ba)
-
-
-
-    We could leave the lights on, sun-tan (bo-bow-bo-bo)
-
-    We
-    could get lunch, aw, man (ba-ba-ba-ba-ba)
-
-    I think that I like you (you do?)
-    Yeah
-
-    But something bugs me ''bout the way you lick your envelopes, so-
-
-
-
-    I''m
-    out on the block again (ba-ba-ba-ba-ba)
-
-    So hopped up that I can''t pretend
-
-    Two
-    time (ba-ba-ba-ba-ba), stay friends
-
-    Problem that you can''t defend (oh)
-
-    Hands
-    up, feel okay (ba-ba-ba-ba-ba)
-
-    Whose heart could I break today?
-
-    Two
-    time (ba-ba-ba-ba-ba), stay friends
-
-    Problem that you can''t defend
-
-
-
-    (Oh)
-
-    (Why
-    does it ha-happen?)
-
-
-
-    Slip me in your pocket
-
-    Chicka-chew the way out
-
-    Oh
-    man, was that your last piece of gum? (Ba-ba-ba-ba-ba)
-
-    (Come on) but we
-    both wanted some
-
-    I know, and you can get in the hole too
-
-    Oh yeah, what
-    can you say?
-
-    I never read the package anyway (oh)
-
-
-
-    I''m out on the
-    block again (ba-ba-ba-ba-ba)
-
-    So hopped up that I can''t pretend (ooh)
-
-    Two
-    time (ba-ba-ba-ba-ba), stay friends
-
-    Problem that you can''t defend (oh)
-
-    Hands
-    up, feel okay (ba-ba-ba-ba-ba)
-
-    Whose heart could I break today?
-
-    Two
-    time (ba-ba-ba-ba-ba), stay friends
-
-    Problem that you can''t defend
-
-
-
-    I''m
-    out on the block again (ba-ba-ba-ba-ba)
-
-    So hopped up that I can''t pretend
-    (ooh)
-
-    Two time (ba-ba-ba-ba-ba), stay friends
-
-    Problem that you can''t
-    defend (oh)
-
-    Hands up, feel okay (ba-ba-ba-ba-ba)
-
-    Whose heart could
-    I break today?
-
-    Two time (ba-ba-ba-ba-ba), stay friends
-
-    Problem that
-    you can''t defend
-
-'
+  m_text: "E - \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0439 \u0434\u0438\u0430\u043B\u043E\u0433
+    / \u0432\u0437\u0430\u0438\u043C\u043E\u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435.\nEnter
+    - \u0437\u0430\u043A\u0440\u044B\u0442\u044C \u043E\u043A\u043D\u043E.\n\u0421\u0442\u0440\u0435\u043B\u043E\u0447\u043A\u0438/WASD
+    - \u0445\u043E\u0434\u044C\u0431\u0430."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 049971a2d4188684bb78c1d0bbe5eb94, type: 2}
   m_sharedMaterial: {fileID: 2835919048874922254, guid: 049971a2d4188684bb78c1d0bbe5eb94, type: 2}

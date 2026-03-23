@@ -35,6 +35,7 @@ public class Window : Interactable
                     break;
 
                 default:
+                    if (dialogueBox.isActive) return;
                     //windowThoughts = new List<string> { "" };
                     break;
             }
