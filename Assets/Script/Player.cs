@@ -101,6 +101,7 @@ public class Player : MonoBehaviour
                 interactedWithWindow = hit.transform.GetComponent<Window>() != null;
                 interactedWithWorkingStation = hit.transform.GetComponent<WorkingStation>() != null;
                 interactedWithBed = hit.transform.GetComponent<Bed>() != null;
+                interactedWithShotgun = hit.transform.GetComponent<Shotgun>() != null;
             }
         }
         else
