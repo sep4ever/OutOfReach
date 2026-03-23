@@ -24,6 +24,7 @@ public class QuestHandling : MonoBehaviour
     [SerializeField] public int questId;
     Player player;
     [SerializeField] string markUpParameter;
+    bool opened = false;
     private void Awake()
     {
         questImage = GetComponent<RectTransform>();
@@ -44,8 +45,8 @@ public class QuestHandling : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) Open();
-        if (Input.GetKeyDown(KeyCode.E)) Close();
+        if (Input.GetKeyDown(KeyCode.Q) && !opened) Open();
+        if (Input.GetKeyDown(KeyCode.Q) && opened) Close();
 
         if (quests[questId].isCompleted && !AllQuestsCompleted())
         {
@@ -106,6 +107,7 @@ public class QuestHandling : MonoBehaviour
         Vector3 finalPos = questImage.localPosition;
         finalPos.x = targetX;
         questImage.localPosition = finalPos;
+        opened = true;
     }
     IEnumerator CloseCoroutine()
     {
@@ -124,5 +126,6 @@ public class QuestHandling : MonoBehaviour
         Vector3 finalPos = questImage.localPosition;
         finalPos.x = targetX;
         questImage.localPosition = finalPos;
+        opened=false;
     }
 }

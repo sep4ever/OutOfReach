@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class WorkingStation : Interactable
 {
@@ -21,6 +22,27 @@ public class WorkingStation : Interactable
     Coroutine fadingCoroutine = null;
     public override void Interact()
     {
+        //workingDialogues.Clear();
+        switch (questHandling.questId)
+        {
+            case 1:
+                workingDialogues = new List<string> { "Как же после этих отчётов хочется спать.." };
+                break;
+            case 4:
+                workingDialogues = new List<string> { "Работа, работа и опять работа... Господи. Неужели я всё ещё должен заполнять документы?", "Неужто ещё не знают, что мы все умрём...", "Это всё бессмысленно." };
+                break;
+
+            case 7:
+                workingDialogues = new List<string> { "Сегодня я видел человека в окне... Я должен отправить это начальству!", "Всё же, не все в городе вымерли..." };
+                break;
+
+            default:
+                if (!dialogueBox.finishedDialogue && fadingCoroutine != null || dialogueBox.isActive) { return; }
+                workingDialogues = new List<string> { "Не время для работы." };
+                dialogueBox.SetMessages(workingDialogues);
+                fadingCoroutine = null;
+                return;
+        }
         if (fadingCoroutine == null)
         {
             fadingCoroutine = StartCoroutine(FadeToBlack());
@@ -29,26 +51,6 @@ public class WorkingStation : Interactable
 
     IEnumerator FadeToBlack()
     {
-        if (true)
-        {
-            switch (questHandling.questId)
-            {
-                case 1:
-                    workingDialogues = new List<string> { "Работа, работа и опять работа... Господи. Неужели я всё ещё должен заполнять документы?", "Неужто ещё не знают, что мы все умрём...", "Это всё бессмысленно." };
-                    break;
-                case 4:
-                    workingDialogues = new List<string> { "Работа, работа и опять работа... Господи. Неужели я всё ещё должен заполнять документы?", "Неужто ещё не знают, что мы все умрём...", "Это всё бессмысленно." };
-                    break;
-
-                case 7:
-                    workingDialogues = new List<string> { "Скоро... Скоро всё закончится. Просто... П-просто...", "Просто нужно немного потерпеть..." };
-                    break;
-
-                default:
-                    //workingDialogues = new List<string> { "Здесь больше нечего делать." };
-                    break;
-            }
-        }
 
         float t = 0f;
         player.canMove = false;
@@ -75,7 +77,7 @@ public class WorkingStation : Interactable
         workingStationImage.color = new Color(0, 0, 0, 0);
         player.canMove = true;
 
-        dialogueBox.SetMessages(workingDialogues);
         fadingCoroutine = null;
+        dialogueBox.SetMessages(workingDialogues);
     }
 }
