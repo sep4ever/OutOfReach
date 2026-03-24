@@ -31,7 +31,9 @@ public class Window : Interactable
             case 8:
                 windowThoughts = new List<string> { "Ммм... Это окно.", "Погоди... Что это там... В тумане...", "Там... Человек?!" };
                 break;
-
+            case 12:
+                windowThoughts = new List<string> { "Окошко." };
+                break;
             default:
                 if (dialogueBox.isActive) return;
                 //windowThoughts = new List<string> { "" };

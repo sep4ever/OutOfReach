@@ -42,20 +42,28 @@ public class QuestHandling : MonoBehaviour
         Func<bool> interactWithAxe = () => player.interactions.Contains(InteractionType.Axe);
         Func<bool> hasAxe = () => player.hasAxe;
         Func<bool> interactWithDoor = () => player.interactions.Contains(InteractionType.Door);
+        Func<bool> interactWithTelegraph = () => player.interactions.Contains(InteractionType.Telegraph);
 
         quests[0].completionCondition = interactWithWindow;//player.interactedWithWindow; //player.interactedWithWindow - костыль, проверяет название объекта. Измени, если будет возможность.
         quests[1].completionCondition = interactWithWorkStation;//player.interactedWithWorkingStation;
         quests[2].completionCondition = interactWithDocuments;
         quests[3].completionCondition = interactWithBed;//player.interactedWithBed;
+
         quests[4].completionCondition = interactWithWindow;//player.interactedWithWindow;
         quests[5].completionCondition = interactWithWorkStation;//player.interactedWithWorkingStation;
         quests[6].completionCondition = interactWithDoor;
         quests[7].completionCondition = interactWithBed;//player.interactedWithBed;
-        quests[8].completionCondition = interactWithWindow;//player.interactedWithWindow;
-        quests[9].completionCondition = interactWithAxe;
-        quests[10].completionCondition = () => player.hasAxe && player.interactions.Contains(InteractionType.WorkStation);
-        quests[11].completionCondition = interactWithDocuments;
-        quests[12].completionCondition = interactWithShotgun;//player.interactedWithShotgun;
+
+        quests[8].completionCondition = interactWithWindow;
+        quests[9].completionCondition = interactWithWorkStation;
+        quests[10].completionCondition = interactWithTelegraph;
+        quests[11].completionCondition = interactWithBed;
+
+        quests[12].completionCondition = interactWithWindow;//player.interactedWithWindow;
+        quests[13].completionCondition = interactWithAxe;
+        quests[14].completionCondition = () => player.hasAxe && player.interactions.Contains(InteractionType.WorkStation);
+        quests[15].completionCondition = interactWithDocuments;
+        quests[16].completionCondition = interactWithShotgun;//player.interactedWithShotgun;
     }
     private void Update()
     {

@@ -24,7 +24,7 @@ public class Shotgun : Interactable
 
     public override void Interact()
     {
-        if (questHandling.questId == 12)
+        if (questHandling.questId == 16)
         {
             if (!dialogue.isActive) dialogue.SetMessages(nearDeathThoughts);
             if (dialogue.finishedDialogue && fadingCoroutine == null) fadingCoroutine = StartCoroutine(FadeToBlack());

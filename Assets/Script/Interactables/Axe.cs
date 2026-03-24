@@ -14,7 +14,7 @@ public class Axe : Interactable
     }
     public override void Interact()
     {
-        if (questHandling.questId == 9) gameObject.SetActive(false);
+        if (questHandling.questId == 13) gameObject.SetActive(false);
         else if (!dialogueBox.isActive) dialogueBox.SetMessages(thoughts);
     }
 }

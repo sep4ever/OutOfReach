@@ -32,7 +32,7 @@ public class Documents : Interactable
 
     public override void Interact()
     {
-        if (questHandling.questId != 11) OpenDocuments();
+        if (questHandling.questId != 15) OpenDocuments();
         else if (fadingCoroutine == null) fadingCoroutine = StartCoroutine(FadeToBlack());
     }
 

@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
                 interactable.Interact();
 
                 if (!interactions.Contains(interactable.id)) interactions.Add(interactable.id);
-                if (!hasAxe && questHandler.questId == 9) hasAxe = hit.transform.GetComponent<Axe>() != null;
+                if (!hasAxe && questHandler.questId == 13) hasAxe = hit.transform.GetComponent<Axe>() != null;
                 /*interactedWithWindow = hit.transform.GetComponent<Window>() != null;
                 interactedWithWorkingStation = hit.transform.GetComponent<WorkingStation>() != null;
                 interactedWithBed = hit.transform.GetComponent<Bed>() != null;

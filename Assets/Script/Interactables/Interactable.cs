@@ -8,7 +8,8 @@ public enum InteractionType
     Axe,
     Documents,
     Shotgun,
-    Door
+    Door,
+    Telegraph
 }
 
 public class Interactable : MonoBehaviour
@@ -17,6 +18,6 @@ public class Interactable : MonoBehaviour
     public InteractionType id;
     public virtual void Interact()
     {
-        Debug.Log("Interacted with " + transform.name);
+        Debug.Log("Interacted with " + transform.name + ",with id of " + id);
     }
 }

@@ -31,7 +31,7 @@ public class Bed : Interactable
         {
             if (fadingCoroutine == null) fadingCoroutine = StartCoroutine(FadeToBlack());
         }
-        else 
+        else
         {
             if (!dialogueBox.isActive) dialogueBox.SetMessages(new List<string> { "Я пока не хочу спать." });
         }
@@ -39,7 +39,7 @@ public class Bed : Interactable
 
     void Update()
     {
-        sleep = questHandling.questId == 3 || questHandling.questId == 7;
+        sleep = questHandling.questId == 3 || questHandling.questId == 7 || questHandling.questId == 11;
     }
 
     IEnumerator FadeToBlack()
@@ -87,7 +87,7 @@ public class Bed : Interactable
         fadingCoroutine = null;
         if (!dialogueBox.isActive)
         {
-            if (questHandling.quests[3].isCompleted) dialogueBox.SetMessages(new List<string> { "О-опять... Она опять мне снилась..." });
+            if (questHandling.quests[3].isCompleted) dialogueBox.SetMessages(new List<string> { "О-опять... Она опять мне снилась...", "Я переживаю... Вдруг что-то случилось?" });
             if (questHandling.quests[7].isCompleted) dialogueBox.SetMessages(new List<string> { "Я... Я не буду больше спать... Мне болезненно видеть её лицо во снах...", "Вернее... Обрывки лица, владельца которого я забываю..." });
         }
     }
