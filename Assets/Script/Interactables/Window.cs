@@ -8,7 +8,7 @@ public class Window : Interactable
 
     [SerializeField] GameObject windowImage;
     [SerializeField] DialogueBox dialogueBox;
-    [SerializeField] List<string> windowThoughts = new List<string>();
+    [SerializeField][TextArea] List<string> windowThoughts = new List<string>();
     Player player;
     QuestHandling questHandling;
     private void Start()
@@ -23,7 +23,7 @@ public class Window : Interactable
         switch (questHandling.questId)
         {
             case 0:
-                windowThoughts = new List<string> { "Безнадёжный вид безнадёжного города!", "Честно, мне кажется, что скоро наше правительство нас самих всех перестреляет!" };
+                windowThoughts = new List<string> { "Сегодня мне передали отчёт о погибших...", "Я... Я всё ещё не могу поверить в то, что я увидел...", "Она... Любовь моей жизни...", "Она мертва... И я даже не знаю по какой причине...", "Я... Я не могу даже на похороны придти...", "Всё из-за этих чёртовых отчётов... Меня убьют, если я пропущу хоть 1..." };
                 break;
             case 4:
                 windowThoughts = new List<string> { "Окно. Кровавый туман. Безнадёга.", "Впрочем, никаких изменений со вчерашнего дня...", "Эх... Когда я в окно смотрю чаще чем в зеркало...", "Как я вообще выгляжу?" };

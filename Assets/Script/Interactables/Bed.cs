@@ -85,5 +85,10 @@ public class Bed : Interactable
         music.volume = GameManager.Instance.saveData.volume;
         player.canMove = true;
         fadingCoroutine = null;
+        if (!dialogueBox.isActive)
+        {
+            if (questHandling.quests[3].isCompleted) dialogueBox.SetMessages(new List<string> { "О-опять... Она опять мне снилась..." });
+            if (questHandling.quests[7].isCompleted) dialogueBox.SetMessages(new List<string> { "Я... Я не буду больше спать... Мне болезненно видеть её лицо во снах...", "Вернее... Обрывки лица, владельца которого я забываю..." });
+        }
     }
 }

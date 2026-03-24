@@ -1,18 +1,24 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-
+using System.Collections.Generic;
 public class Door : Interactable
 {
     [SerializeField] RawImage bedImage;
     Player player;
     QuestHandling questHandling;
     AudioSource wieldSound;
+    DialogueBox dialogueBox;
+
+    [SerializeField][TextArea(10,10)] List<string> completedThoughts;
+    [SerializeField][TextArea(10,10)] List<string> uncompletedThoughts;
 
     public override void Interact()
     {
         if (fadingCoroutine != null) return;
         if (questHandling.questId == 6) fadingCoroutine = StartCoroutine(FadeToBlack());
+        List<string> thoughts = questHandling.quests[6].isCompleted ? completedThoughts : uncompletedThoughts;
+        if (!dialogueBox.isActive && fadingCoroutine == null) dialogueBox.SetMessages(thoughts);
     }
 
     private void Awake()
@@ -20,6 +26,7 @@ public class Door : Interactable
         player = FindAnyObjectByType<Player>();
         questHandling = FindAnyObjectByType<QuestHandling>();
         wieldSound = GetComponent<AudioSource>();
+        dialogueBox = FindAnyObjectByType<DialogueBox>();
     }
 
     float duration = 1f;

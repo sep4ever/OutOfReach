@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class DialogueBox : MonoBehaviour
 {
-    [SerializeField] public List<string> dialogueLines = new List<string>();
+    [SerializeField][TextArea] public List<string> dialogueLines = new List<string>();
     [SerializeField] TMP_Text text;
     [SerializeField] float typingSpeed = 0.05f;
 

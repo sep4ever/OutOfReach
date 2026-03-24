@@ -36,7 +36,7 @@ public class WorkingStation : Interactable
         switch (questHandling.questId)
         {
             case 1:
-                workingDialogues = new List<string> { "Как же после этих отчётов хочется спать.." };
+                workingDialogues = new List<string> { "Я должен был отвлечься от этой новости...", "Мне нужно поспать... Я... Я переживу..." };
                 break;
             case 5:
                 workingDialogues = new List<string> { "Работа, работа и опять работа... Господи. Неужели я всё ещё должен заполнять документы?", "Неужто ещё не знают, что мы все умрём...", "Это всё бессмысленно." };
