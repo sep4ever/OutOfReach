@@ -14,7 +14,7 @@ public class Shotgun : Interactable
 
     public override void Interact()
     {
-        if (questHandling.questId == 8) SceneManager.LoadScene("End");
+        if (questHandling.questId == 12) SceneManager.LoadScene("End");
         else if (!dialogue.isActive) dialogue.SetMessages(thoughts);
     }
 }

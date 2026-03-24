@@ -39,7 +39,7 @@ public class Bed : Interactable
 
     void Update()
     {
-        sleep = questHandling.questId == 2 || questHandling.questId == 5;
+        sleep = questHandling.questId == 3 || questHandling.questId == 7;
     }
 
     IEnumerator FadeToBlack()

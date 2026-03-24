@@ -42,7 +42,7 @@ public class DialogueBox : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (!finished)
+            if (!finished && !waiting)
             {
                 text.maxVisibleCharacters = dialogueLines[iterator].Length;
                 return;
@@ -67,13 +67,21 @@ public class DialogueBox : MonoBehaviour
         typingCoroutine = StartCoroutine(TypingCoroutine());
     }
 
+    bool waiting = false;
     IEnumerator TypingCoroutine()
     {
         string currentLine = dialogueLines[iterator];
         while (text.maxVisibleCharacters < currentLine.Length)
         {
+            char currentChar = currentLine[text.maxVisibleCharacters];
             finished = false;
+            waiting = false;
             text.maxVisibleCharacters++;
+            if (currentChar == '\n')
+            {
+                waiting = true;
+                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+            }
             yield return new WaitForSeconds(typingSpeed);
         }
         finished = true;

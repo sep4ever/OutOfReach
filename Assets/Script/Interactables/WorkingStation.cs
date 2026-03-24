@@ -10,6 +10,7 @@ public class WorkingStation : Interactable
     [SerializeField] DialogueBox dialogueBox;
     [SerializeField] List<string> workingDialogues;
     QuestHandling questHandling;
+    AudioSource crushSound;
     Player player;
     float duration = 2f;
 
@@ -17,23 +18,28 @@ public class WorkingStation : Interactable
     {
         questHandling = FindAnyObjectByType<QuestHandling>();
         player = FindAnyObjectByType<Player>();
+        crushSound = GetComponent<AudioSource>();
+        //crushSound.Play();
     }
 
     Coroutine fadingCoroutine = null;
     public override void Interact()
     {
+        if (!canInteract) return;
+        if (player.hasAxe)
+        {
+            if (fadingCoroutine == null) fadingCoroutine = StartCoroutine(FadeToBlack());
+            return;
+            //gameObject.SetActive(false);
+        }
         //workingDialogues.Clear();
         switch (questHandling.questId)
         {
             case 1:
                 workingDialogues = new List<string> { "Как же после этих отчётов хочется спать.." };
                 break;
-            case 4:
+            case 5:
                 workingDialogues = new List<string> { "Работа, работа и опять работа... Господи. Неужели я всё ещё должен заполнять документы?", "Неужто ещё не знают, что мы все умрём...", "Это всё бессмысленно." };
-                break;
-
-            case 7:
-                workingDialogues = new List<string> { "Сегодня я видел человека в окне... Я должен отправить это начальству!", "Всё же, не все в городе вымерли..." };
                 break;
 
             default:
@@ -63,6 +69,21 @@ public class WorkingStation : Interactable
             yield return null;
         }
 
+        if (player.hasAxe)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                crushSound.pitch = Random.Range(0.5f, 1.2f);
+                crushSound.Play();
+                yield return new WaitForSeconds(crushSound.clip.length);
+            }
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+            canInteract = false;
+        }
+
         yield return new WaitForSeconds(duration * 2);
 
         t = 0f;
@@ -78,6 +99,6 @@ public class WorkingStation : Interactable
         player.canMove = true;
 
         fadingCoroutine = null;
-        dialogueBox.SetMessages(workingDialogues);
+        if (!player.hasAxe && !dialogueBox.isActive) dialogueBox.SetMessages(workingDialogues);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
     [Header("QuestSystem")]
     [SerializeField] QuestHandling questHandler;
     [SerializeField] public Quest quest;
+    public HashSet<InteractionType> interactions = new HashSet<InteractionType>();
 
     [Header("Starting Dialogue")]
     [SerializeField] DialogueBox dialogueBox;
@@ -65,10 +67,7 @@ public class Player : MonoBehaviour
     [SerializeField] TMP_Text interactionText;
     [SerializeField] float interactionRange;
     bool interacted = false;
-    public bool interactedWithWindow = false;
-    public bool interactedWithWorkingStation = false;
-    public bool interactedWithBed = false;
-    public bool interactedWithShotgun = false;
+    public bool hasAxe = false;
     void Interact()
     {
         RaycastHit hit;
@@ -85,6 +84,7 @@ public class Player : MonoBehaviour
         {
             interactionText.gameObject.SetActive(false);
             interacted = false;
+            interactions.Clear();
             return;
         }
 
@@ -98,10 +98,13 @@ public class Player : MonoBehaviour
             {
                 interacted = true;
                 interactable.Interact();
-                interactedWithWindow = hit.transform.GetComponent<Window>() != null;
+
+                if (!interactions.Contains(interactable.id)) interactions.Add(interactable.id);
+                if (!hasAxe && questHandler.questId == 9) hasAxe = hit.transform.GetComponent<Axe>() != null;
+                /*interactedWithWindow = hit.transform.GetComponent<Window>() != null;
                 interactedWithWorkingStation = hit.transform.GetComponent<WorkingStation>() != null;
                 interactedWithBed = hit.transform.GetComponent<Bed>() != null;
-                interactedWithShotgun = hit.transform.GetComponent<Shotgun>() != null;
+                interactedWithShotgun = hit.transform.GetComponent<Shotgun>() != null;*/
             }
         }
         else

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using TMPro;
 using UnityEngine;
 
@@ -10,7 +12,7 @@ public class Quest
     public string description;
     public bool isCompleted;
 
-    public System.Func<bool> completionCondition;
+    public Func<bool> completionCondition;
 }
 
 public class QuestHandling : MonoBehaviour
@@ -22,7 +24,7 @@ public class QuestHandling : MonoBehaviour
     [SerializeField] public List<Quest> quests = new List<Quest>(); // Короче, есть лист с квестами, он является константой(просто незаданным, чтоб был в инспекторе). Каждому квесту задаётся условие В РУЧНУЮ. В методе Awake().
      
     [SerializeField] public int questId;
-    Player player;
+    public Player player;
     [SerializeField] string markUpParameter;
     bool opened = false;
     private void Awake()
@@ -32,16 +34,28 @@ public class QuestHandling : MonoBehaviour
 
         //questId = Random.Range(0, quests.Count);
         player.quest = quests[questId];
+        Func<bool> interactWithWindow = () => player.interactions.Contains(InteractionType.Window);
+        Func<bool> interactWithBed = () => player.interactions.Contains(InteractionType.Bed);
+        Func<bool> interactWithWorkStation = () => player.interactions.Contains(InteractionType.WorkStation);
+        Func<bool> interactWithDocuments = () => player.interactions.Contains(InteractionType.Documents);
+        Func<bool> interactWithShotgun = () => player.interactions.Contains(InteractionType.Shotgun);
+        Func<bool> interactWithAxe = () => player.interactions.Contains(InteractionType.Axe);
+        Func<bool> hasAxe = () => player.hasAxe;
+        Func<bool> interactWithDoor = () => player.interactions.Contains(InteractionType.Door);
 
-        quests[0].completionCondition = () => player.interactedWithWindow; //player.interactedWithWindow - костыль, проверяет название объекта. Измени, если будет возможность.
-        quests[1].completionCondition = () => player.interactedWithWorkingStation;
-        quests[2].completionCondition = () => player.interactedWithBed;
-        quests[3].completionCondition = () => player.interactedWithWindow;
-        quests[4].completionCondition = () => player.interactedWithWorkingStation;
-        quests[5].completionCondition = () => player.interactedWithBed;
-        quests[6].completionCondition = () => player.interactedWithWindow;
-        quests[7].completionCondition = () => player.interactedWithWorkingStation;
-        quests[8].completionCondition = () => player.interactedWithShotgun;
+        quests[0].completionCondition = interactWithWindow;//player.interactedWithWindow; //player.interactedWithWindow - костыль, проверяет название объекта. Измени, если будет возможность.
+        quests[1].completionCondition = interactWithWorkStation;//player.interactedWithWorkingStation;
+        quests[2].completionCondition = interactWithDocuments;
+        quests[3].completionCondition = interactWithBed;//player.interactedWithBed;
+        quests[4].completionCondition = interactWithWindow;//player.interactedWithWindow;
+        quests[5].completionCondition = interactWithWorkStation;//player.interactedWithWorkingStation;
+        quests[6].completionCondition = interactWithDoor;
+        quests[7].completionCondition = interactWithBed;//player.interactedWithBed;
+        quests[8].completionCondition = interactWithWindow;//player.interactedWithWindow;
+        quests[9].completionCondition = interactWithAxe;
+        quests[10].completionCondition = () => player.hasAxe && player.interactions.Contains(InteractionType.WorkStation);
+        quests[11].completionCondition = interactWithDocuments;
+        quests[12].completionCondition = interactWithShotgun;//player.interactedWithShotgun;
     }
     private void Update()
     {
