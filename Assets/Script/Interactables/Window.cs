@@ -14,8 +14,7 @@ public class Window : Interactable
     private void Start()
     {
         player = FindAnyObjectByType<Player>();
-        questHandling = FindAnyObjectByType<QuestHandling>();
-        //windowThoughts = new List<string>{ "I hate that view.", "Always hated it, and always will hate." };
+        questHandling = FindAnyObjectByType<QuestHandling>();       
     }
 
     public override void Interact()
@@ -23,20 +22,19 @@ public class Window : Interactable
         switch (questHandling.questId)
         {
             case 0:
-                windowThoughts = new List<string> { "Сегодня мне передали отчёт о погибших...", "Я... Я всё ещё не могу поверить в то, что я увидел...", "Она... Любовь моей жизни...", "Она мертва... И я даже не знаю по какой причине...", "Я... Я не могу даже на похороны придти...", "Всё из-за этих чёртовых отчётов... Меня убьют, если я пропущу хоть 1..." };
+                windowThoughts = new List<string> { "Сегодня мне передали отчёт о погибших...", "Я... Я всё ещё не могу поверить в то, что я увидел...", "Это все... Это все мирные люди, которые никому не причиняли зла...", "Они мертвы... И я даже не знаю по какой причине...", "Я... Я не могу даже как-либо им помочь", "Всё из-за этих чёртовых отчётов... Меня убьют, если я пропущу хоть 1..." };
                 break;
             case 4:
-                windowThoughts = new List<string> { "Окно. Кровавый туман. Безнадёга.", "Впрочем, никаких изменений со вчерашнего дня...", "Эх... Когда я в окно смотрю чаще чем в зеркало...", "Как я вообще выгляжу?" };
+                windowThoughts = new List<string> { "Окно. Кровавый туман. Безнадёга. Какой же животный страх меня накрывает...", "...при мысли что когда-то они придут и к моей двери...", "Надо бы заварить дверь...", "Даже если выбраться я потом не смогу...", "Лучше уж сдохнуть тут, чем медленно подыхать от газов..." };
                 break;
             case 8:
-                windowThoughts = new List<string> { "Ммм... Это окно.", "Погоди... Что это там... В тумане...", "Там... Человек?!" };
+                windowThoughts = new List<string> { "Ммм... Это окно.", "Так... Что это там... В тумане...", "Это человек?!", "Как же он изувечен, все лицо как будто каша...", "Еще и розоватая лужица возле него... Брррр..."};
                 break;
             case 12:
-                windowThoughts = new List<string> { "Окошко." };
+                windowThoughts = new List<string> { "Я ненавижу свою жизнь. Я ненавижу их. Я ненавижу нас. Я ненавижу всех." };
                 break;
             default:
-                if (dialogueBox.isActive) return;
-                //windowThoughts = new List<string> { "" };
+                if (dialogueBox.isActive) return;;
                 break;
         }
         if (dialogueBox.dialogueLines != windowThoughts) dialogueBox.SetMessages(windowThoughts);

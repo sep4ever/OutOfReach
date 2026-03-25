@@ -87,8 +87,8 @@ public class Bed : Interactable
         fadingCoroutine = null;
         if (!dialogueBox.isActive)
         {
-            if (questHandling.quests[3].isCompleted) dialogueBox.SetMessages(new List<string> { "О-опять... Она опять мне снилась...", "Я переживаю... Вдруг что-то случилось?" });
-            if (questHandling.quests[7].isCompleted) dialogueBox.SetMessages(new List<string> { "Я... Я не буду больше спать... Мне болезненно видеть её лицо во снах...", "Вернее... Обрывки лица, владельца которого я забываю..." });
+            if (questHandling.quests[3].isCompleted) dialogueBox.SetMessages(new List<string> { "О-опять... Она опять мне снилась...", "Я переживаю... Вдруг что-то случилось?", "Господи, это единственное, что сдерживает меня от петли..." });
+            if (questHandling.quests[7].isCompleted) dialogueBox.SetMessages(new List<string> { "Я... Я не буду больше спать... Мне болезненно видеть её лицо во снах...", "Вернее... Обрывки лица, владельца которого я забываю...", "Скоро я забуду и самого себя..." });
         }
     }
 }

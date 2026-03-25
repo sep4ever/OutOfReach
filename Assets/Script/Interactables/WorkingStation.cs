@@ -19,7 +19,6 @@ public class WorkingStation : Interactable
         questHandling = FindAnyObjectByType<QuestHandling>();
         player = FindAnyObjectByType<Player>();
         crushSound = GetComponent<AudioSource>();
-        //crushSound.Play();
     }
 
     Coroutine fadingCoroutine = null;
@@ -30,20 +29,18 @@ public class WorkingStation : Interactable
         {
             if (fadingCoroutine == null) fadingCoroutine = StartCoroutine(FadeToBlack());
             return;
-            //gameObject.SetActive(false);
         }
-        //workingDialogues.Clear();
         switch (questHandling.questId)
         {
             case 1:
-                workingDialogues = new List<string> { "Чёртовы отчёты... Зачем я устроился на \"прибыльную\" работу?" };
+                workingDialogues = new List<string> { "Чёртовы отчёты... Зачем я устроился на \"прибыльную\" работу?", "Все равно всем на них насрать, лишь бы галочку поставить, что все оформлено..." };
                 break;
             case 5:
-                workingDialogues = new List<string> { "Работа, работа и опять работа... Господи. Неужели я всё ещё должен заполнять документы?", "Неужто ещё не знают, что мы все умрём...", "Это всё бессмысленно." };
+                workingDialogues = new List<string> { "Работа, работа и опять работа... Господи. Неужели я всё ещё должен заполнять документы?", "Может бросить все это?", "Это настолько бессмысленно! Они ведь даже не могут позаботиться о моей безопасности" };
                 break;
 
             case 9:
-                workingDialogues = new List<string> { "Работа, сон, работа, сон." };
+                workingDialogues = new List<string> { "Родился, поработал, слег.", "Ненавижу эту жизнь.", "Пора с этим кончать." };
                 break;
 
             default:
