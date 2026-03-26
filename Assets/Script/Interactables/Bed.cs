@@ -27,13 +27,16 @@ public class Bed : Interactable
     bool sleep;
     public override void Interact()
     {
-        if (sleep)
+        if (fadingCoroutine == null)
         {
-            if (fadingCoroutine == null) fadingCoroutine = StartCoroutine(FadeToBlack());
-        }
-        else
-        {
-            if (!dialogueBox.isActive) dialogueBox.SetMessages(new List<string> { "Я пока не хочу спать." });
+            if (sleep)
+            {
+                fadingCoroutine = StartCoroutine(FadeToBlack());
+            }
+            else
+            {
+                if (!dialogueBox.isActive) dialogueBox.SetMessages(new List<string> { "Я пока не хочу спать." });
+            }
         }
     }
 

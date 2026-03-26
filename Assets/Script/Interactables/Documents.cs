@@ -32,7 +32,7 @@ public class Documents : Interactable
 
     public override void Interact()
     {
-        if (questHandling.questId != 15) OpenDocuments();
+        if (questHandling.questId != 15) interacting = true;
         else if (fadingCoroutine == null) fadingCoroutine = StartCoroutine(FadeToBlack());
     }
 
@@ -41,14 +41,22 @@ public class Documents : Interactable
         range = Vector3.Distance(transform.position, playerTransform.position);
         document.SetActive(interacting);
         if (Input.GetKeyDown(KeyCode.Return) || range > interactionRange) interacting = false;
+
+        if (interacting)
+        {
+            OpenDocuments();
+        }
     }
 
     void OpenDocuments()
     {
-        interacting = true;
-        documentText.text = documentLines[documentPage];
-        if (documentPage < documentLines.Count - 1) documentPage++;
-        else documentPage = 0;
+
+        if (Input.GetKeyDown(KeyCode.E) || documentText.text == "")
+        {
+            documentText.text = documentLines[documentPage];
+            if (documentPage < documentLines.Count - 1) documentPage++;
+            else documentPage = 0;
+        }
     }
 
     float duration = 1f;

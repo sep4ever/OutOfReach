@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
         {
             interactionText.gameObject.SetActive(!interacted && interactable.canInteract);
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKey(KeyCode.E) && !interacted)
             {
                 interacted = true;
                 interactable.Interact();
